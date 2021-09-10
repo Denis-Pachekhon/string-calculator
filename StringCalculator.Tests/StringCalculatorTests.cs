@@ -15,7 +15,7 @@ namespace StringCalculator.Tests
         }
 
         [TestMethod]
-        public void Sum_EmptyString_Zero()
+        public void Add_EmptyString_Zero()
         {
             // arrange
             var emptyString = String.Empty;
@@ -23,6 +23,34 @@ namespace StringCalculator.Tests
 
             // act
             var result = calculator.Add(emptyString);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Add_OneNumber_ReturnsTheSameNumber()
+        {
+            // arrange
+            var oneNumber = "3";
+            var expected = 3;
+
+            // act
+            var result = calculator.Add(oneNumber);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Add_TwoNumber_ReturnsTheirSum()
+        {
+            // arrange
+            var twoNumber = "1,2";
+            var expected = 3;
+
+            // act
+            var result = calculator.Add(twoNumber);
 
             // assert
             Assert.AreEqual(expected, result);
