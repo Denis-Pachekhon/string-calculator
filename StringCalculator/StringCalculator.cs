@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StringCalculator
 {
@@ -13,7 +15,7 @@ namespace StringCalculator
                 return SUM_FOR_AN_EMPTY_STRING;
             }
 
-            return 1;
+            return Convert.ToInt32(numbers);
         }
     }
 }
