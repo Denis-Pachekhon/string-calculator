@@ -1,0 +1,9 @@
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\bin\Debug\netstandard2.0\StringCalculator.deps.json
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\bin\Debug\netstandard2.0\StringCalculator.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\bin\Debug\netstandard2.0\StringCalculator.pdb
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\obj\Debug\netstandard2.0\StringCalculator.csprojAssemblyReference.cache
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\obj\Debug\netstandard2.0\StringCalculator.AssemblyInfoInputs.cache
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\obj\Debug\netstandard2.0\StringCalculator.AssemblyInfo.cs
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\obj\Debug\netstandard2.0\StringCalculator.csproj.CoreCompileInputs.cache
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\obj\Debug\netstandard2.0\StringCalculator.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator\obj\Debug\netstandard2.0\StringCalculator.pdb

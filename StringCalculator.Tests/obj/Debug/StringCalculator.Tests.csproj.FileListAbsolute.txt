@@ -1,0 +1,16 @@
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\StringCalculator.Tests.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\StringCalculator.Tests.pdb
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\StringCalculator.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\StringCalculator.pdb
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\StringCalculator.Tests.csprojAssemblyReference.cache
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\StringCalculator.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\StringCalculator.Tests.csproj.CopyComplete
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\StringCalculator.Tests.dll
+C:\Users\Katy\source\repos\StringCalculator\StringCalculator.Tests\obj\Debug\StringCalculator.Tests.pdb
