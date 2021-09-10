@@ -41,5 +41,19 @@ namespace StringCalculator.Tests
             // assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Add_TwoNumber_ReturnsTheirSum()
+        {
+            // arrange
+            var twoNumber = "1,2";
+            var expected = 3;
+
+            // act
+            var result = calculator.Add(twoNumber);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
