@@ -18,7 +18,7 @@ namespace StringCalculator.Tests
         public void Add_EmptyString_Zero()
         {
             // arrange
-            var emptyString = String.Empty;
+            var emptyString = "";
             var expected = 0;
 
             // act
@@ -46,8 +46,8 @@ namespace StringCalculator.Tests
         public void Add_TwoNumber_ReturnsTheirSum()
         {
             // arrange
-            var twoNumber = "1,2";
-            var expected = 3;
+            var twoNumber = "12,2";
+            var expected = 14;
 
             // act
             var result = calculator.Add(twoNumber);
@@ -60,11 +60,25 @@ namespace StringCalculator.Tests
         public void Add_NewLine_NewLineAsSeparator()
         {
             // arrange
-            var twoNumber = "1,2\n3";
+            var newLine = "1,2\n3";
             var expected = 6;
 
             // act
-            var result = calculator.Add(twoNumber);
+            var result = calculator.Add(newLine);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Add_NewLine_Zero()
+        {
+            // arrange
+            var newLine = "\n";
+            var expected = 0;
+
+            // act
+            var result = calculator.Add(newLine);
 
             // assert
             Assert.AreEqual(expected, result);

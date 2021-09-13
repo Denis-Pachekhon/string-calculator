@@ -7,11 +7,11 @@ namespace StringCalculator
     public class StringCalculator
     {
         private const int SUM_FOR_AN_EMPTY_STRING = 0;
-        private List<char> SEPERATORS = new List<char>() { ',', '\n' };
+        private List<string> SEPERATORS = new List<string>() { ",", "\n" };
 
         public int Add(string numbers)
         {
-            if (String.IsNullOrEmpty(numbers))
+            if (String.IsNullOrWhiteSpace(numbers))
             {
                 return SUM_FOR_AN_EMPTY_STRING;
             }
@@ -23,7 +23,7 @@ namespace StringCalculator
             
         private List<int> GetNumbers(string numbers)
         {
-            var nums = numbers.Split(SEPERATORS.ToArray());
+            var nums = numbers.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
             var listNumbers = new List<int>();
 
