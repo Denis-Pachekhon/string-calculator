@@ -39,7 +39,7 @@ namespace StringCalculator
 
                 if (number < 0)
                 {
-                    throw new ApplicationException("Negatives not allowed " + number);
+                    throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(nums));
                 }
 
                 listNumbers.Add(number);
@@ -59,6 +59,11 @@ namespace StringCalculator
             SEPERATORS.Add(seperator);
 
             return numbers;
+        }
+
+        private string GetNegativeNumbers(string[] nums)
+        {
+            return String.Join(", ", nums.Where(x => int.Parse(x) < 0).Select(x => x.ToString()));
         }
     }
 }
