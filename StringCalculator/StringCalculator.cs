@@ -37,6 +37,11 @@ namespace StringCalculator
             {
                 var number = int.Parse(num);
 
+                if (number < 0)
+                {
+                    throw new ApplicationException("Negatives not allowed " + number);
+                }
+
                 listNumbers.Add(number);
             }
 

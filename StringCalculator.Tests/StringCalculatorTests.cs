@@ -97,5 +97,18 @@ namespace StringCalculator.Tests
             // assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void Add_Negative_Throws()
+        {
+            // arrange
+            var negative = "-2";
+
+            // act
+            var result = calculator.Add(negative);
+
+            // assert
+        }
     }
 }
