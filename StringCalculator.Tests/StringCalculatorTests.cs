@@ -83,5 +83,19 @@ namespace StringCalculator.Tests
             // assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Add_DifferentDelimiter_SumNumbers()
+        {
+            // arrange
+            var differentDelimiter = "//;;;\n1;;;2";
+            var expected = 3;
+
+            // act
+            var result = calculator.Add(differentDelimiter);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }

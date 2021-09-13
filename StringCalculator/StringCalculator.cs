@@ -8,12 +8,18 @@ namespace StringCalculator
     {
         private const int SUM_FOR_AN_EMPTY_STRING = 0;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
+        private const string INDICATOR = "//";
 
         public int Add(string numbers)
         {
             if (String.IsNullOrWhiteSpace(numbers))
             {
                 return SUM_FOR_AN_EMPTY_STRING;
+            }
+
+            if (numbers.StartsWith(INDICATOR))
+            {
+                numbers = SearchNewSeperators(numbers);
             }
 
             var listNumbers = GetNumbers(numbers);
@@ -35,6 +41,19 @@ namespace StringCalculator
             }
 
             return listNumbers;
+        }
+
+        private string SearchNewSeperators(string numbers)
+        {
+            var customSeperator = numbers.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).First();
+
+            numbers = numbers.Substring(customSeperator.Length, numbers.Length - customSeperator.Length);
+
+            var seperator = string.Concat(customSeperator.Skip(2));
+
+            SEPERATORS.Add(seperator);
+
+            return numbers;
         }
     }
 }
