@@ -7,11 +7,14 @@ namespace StringCalculator
     public class StringCalculator
     {
         private const int SUM_FOR_AN_EMPTY_STRING = 0;
+        private int Count = 0;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
         private const string INDICATOR = "//";
 
         public int Add(string numbers)
         {
+            Count++;
+
             if (String.IsNullOrWhiteSpace(numbers))
             {
                 return SUM_FOR_AN_EMPTY_STRING;
@@ -23,7 +26,7 @@ namespace StringCalculator
             }
 
             var listNumbers = GetNumbers(numbers);
-
+                
             return listNumbers.Sum();
         }
             
@@ -64,6 +67,11 @@ namespace StringCalculator
         private string GetNegativeNumbers(string[] nums)
         {
             return String.Join(", ", nums.Where(x => int.Parse(x) < 0).Select(x => x.ToString()));
+        }
+
+        public int GetCalledCount()
+        {
+            return Count;
         }
     }
 }

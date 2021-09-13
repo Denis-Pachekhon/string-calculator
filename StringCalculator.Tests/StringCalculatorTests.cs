@@ -110,5 +110,19 @@ namespace StringCalculator.Tests
 
             // assert
         }
+
+        [TestMethod]
+        public void DifferentDelimiter_SumNumbers()
+        {
+            // arrange
+   
+            var expected = 7;
+
+            // act
+            var result = calculator.GetCalledCount();
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
