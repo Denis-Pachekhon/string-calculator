@@ -55,5 +55,19 @@ namespace StringCalculator.Tests
             // assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Add_NewLine_NewLineAsSeparator()
+        {
+            // arrange
+            var twoNumber = "1,2\n3";
+            var expected = 6;
+
+            // act
+            var result = calculator.Add(twoNumber);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
