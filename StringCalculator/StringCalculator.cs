@@ -7,7 +7,7 @@ namespace StringCalculator
     public class StringCalculator
     {
         private const int SUM_FOR_AN_EMPTY_STRING = 0;
-        private char[] SEPERATORS = { ',', '\n'};
+        private List<char> SEPERATORS = new List<char>() { ',', '\n' };
 
         public int Add(string numbers)
         {
@@ -20,10 +20,10 @@ namespace StringCalculator
 
             return listNumbers.Sum();
         }
-
+            
         private List<int> GetNumbers(string numbers)
         {
-            var nums = numbers.Split(SEPERATORS);
+            var nums = numbers.Split(SEPERATORS.ToArray());
 
             var listNumbers = new List<int>();
 
