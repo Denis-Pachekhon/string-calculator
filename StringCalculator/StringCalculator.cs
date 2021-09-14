@@ -65,13 +65,15 @@ namespace StringCalculator
 
         private string SearchNewSeperators(string numbers)
         {
+            string[] seperators = { INDICATOR, "[", "]" };
+
             var customSeperator = numbers.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).First();
 
             numbers = numbers.Substring(customSeperator.Length, numbers.Length - customSeperator.Length);
 
-            var seperator = string.Concat(customSeperator.Skip(2));
+            var seperator = customSeperator.Split(seperators, StringSplitOptions.RemoveEmptyEntries);
 
-            SEPERATORS.Add(seperator);
+            SEPERATORS.Add(seperator.First());
 
             return numbers;
         }

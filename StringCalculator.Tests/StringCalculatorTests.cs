@@ -156,5 +156,18 @@ namespace StringCalculator.Tests
             // assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Add_OtherFormatDelimiters_Supported()
+        {
+            var otherFormatDelimiters = "//[***]\n1***2***3";
+            var expected = 6;
+
+            // act
+            var result = calculator.Add(otherFormatDelimiters);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
