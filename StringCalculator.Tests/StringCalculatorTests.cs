@@ -6,10 +6,10 @@ namespace StringCalculator.Tests
     [TestClass]
     public class StringCalculatorTests
     {
-        private static StringCalculator calculator;
+        private StringCalculator calculator;
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext textContext)
+        [TestInitialize]
+        public void TestInitialize()
         {
             calculator = new StringCalculator();
         }
@@ -109,6 +109,91 @@ namespace StringCalculator.Tests
             var result = calculator.Add(negative);
 
             // assert
+        }
+
+        [TestMethod]
+        public void GetCalledCount_Call2Add_Called2Add()
+        {
+            // arrange
+            var expected = 2;
+
+            // act
+            calculator.Add("");
+            calculator.Add("");
+            var count = calculator.GetCalledCount();
+
+            // assert
+            Assert.AreEqual(expected, count);
+        }
+
+        [TestMethod]
+        public void Add_Event_EventCall()
+        {
+            // arrange
+            int giveResult = 0;
+
+            calculator.AddOccured += delegate (string input, int result)
+            {
+                giveResult = result;
+            };
+
+            // act
+            var sum = calculator.Add("1");
+
+            // assert
+            Assert.AreEqual(giveResult, sum);
+        }
+
+        [TestMethod]
+        public void Add_NumbersBiggerThan1000_Ignored()
+        {
+            var numbersBiggerThan1000 = "1005, 3\n10002\n5";
+            var expected = 8;
+
+            // act
+            var result = calculator.Add(numbersBiggerThan1000);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Add_OtherFormatDelimiters_Supported()
+        {
+            var otherFormatDelimiters = "//[***]\n1***2***3";
+            var expected = 6;
+
+            // act
+            var result = calculator.Add(otherFormatDelimiters);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Add_MultipleDelimiters_Supported()
+        {
+            var multipleDelimiters = "//[*][%]\n1*2%3";
+            var expected = 6;
+
+            // act
+            var result = calculator.Add(multipleDelimiters);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Add_MultipleDelimitersWithLengthLongerThanOneChar_Supported()
+        {
+            var multipleDelimiters = "//[**][%%]\n1**2%%3";
+            var expected = 6;
+
+            // act
+            var result = calculator.Add(multipleDelimiters);
+
+            // assert
+            Assert.AreEqual(expected, result);
         }
     }
 }
