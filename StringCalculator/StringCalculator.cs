@@ -27,8 +27,15 @@ namespace StringCalculator
             }
 
             var listNumbers = GetNumbers(numbers);
-                
-            return listNumbers.Sum();
+
+            int sum = listNumbers.Sum();
+
+            if (AddOccured != null)
+            { 
+                AddOccured.Invoke(numbers, sum);
+            }
+
+            return sum;
         }
             
         private List<int> GetNumbers(string numbers)
