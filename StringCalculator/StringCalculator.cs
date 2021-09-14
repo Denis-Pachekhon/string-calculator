@@ -8,6 +8,7 @@ namespace StringCalculator
     {
         private const int SUM_FOR_AN_EMPTY_STRING = 0;
         private int Count = 0;
+        private const int MAX_NUMBER = 1000;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
         private const string INDICATOR = "//";
         public event Action<string, int> AddOccured;
@@ -53,7 +54,10 @@ namespace StringCalculator
                     throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(nums));
                 }
 
-                listNumbers.Add(number);
+                if (number <= MAX_NUMBER)
+                {
+                    listNumbers.Add(number);
+                }
             }
 
             return listNumbers;

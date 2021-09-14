@@ -143,5 +143,18 @@ namespace StringCalculator.Tests
             // assert
             Assert.AreEqual(giveResult, sum);
         }
+
+        [TestMethod]
+        public void Add_NumbersBiggerThan1000_Ignored()
+        {
+            var numbersBiggerThan1000 = "1005, 3\n10002\n5";
+            var expected = 8;
+
+            // act
+            var result = calculator.Add(numbersBiggerThan1000);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
