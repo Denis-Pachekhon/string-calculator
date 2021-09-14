@@ -24,7 +24,9 @@ namespace StringCalculator
 
             if (numbers.StartsWith(INDICATOR))
             {
-                numbers = SearchNewSeperators(numbers);
+                AddNewSeperators(numbers);
+
+                numbers = ClearStringOfNumbersFromTheIndicators(numbers);
             }
 
             var listNumbers = GetNumbers(numbers);
@@ -63,13 +65,11 @@ namespace StringCalculator
             return listNumbers;
         }
 
-        private string SearchNewSeperators(string numbers)
+        private void AddNewSeperators(string numbers)
         {
             string[] indicators = { INDICATOR, "[", "]" };
 
             var customSeperator = numbers.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).First();
-
-            numbers = numbers.Substring(customSeperator.Length, numbers.Length - customSeperator.Length);
 
             var seperators = customSeperator.Split(indicators, StringSplitOptions.RemoveEmptyEntries);
 
@@ -77,7 +77,14 @@ namespace StringCalculator
             {
                 SEPERATORS.Add(seperator);
             }
-            
+        }
+
+        private string ClearStringOfNumbersFromTheIndicators(string numbers)
+        {
+            var customSeperator = numbers.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).First();
+
+            numbers = numbers.Substring(customSeperator.Length, numbers.Length - customSeperator.Length);
+
             return numbers;
         }
 
