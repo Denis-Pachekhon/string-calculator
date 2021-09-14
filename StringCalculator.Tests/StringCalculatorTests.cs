@@ -6,10 +6,10 @@ namespace StringCalculator.Tests
     [TestClass]
     public class StringCalculatorTests
     {
-        private static StringCalculator calculator;
+        private StringCalculator calculator;
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext textContext)
+        [TestInitialize]
+        public void TestInitialize()
         {
             calculator = new StringCalculator();
         }
@@ -112,17 +112,18 @@ namespace StringCalculator.Tests
         }
 
         [TestMethod]
-        public void DifferentDelimiter_SumNumbers()
+        public void GetCalledCount_Call2Add_Called2Add()
         {
             // arrange
-   
-            var expected = 7;
+            var expected = 2;
 
             // act
-            var result = calculator.GetCalledCount();
+            calculator.Add("");
+            calculator.Add("");
+            var count = calculator.GetCalledCount();
 
             // assert
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected, count);
         }
     }
 }

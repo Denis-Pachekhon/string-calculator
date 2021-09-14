@@ -10,6 +10,7 @@ namespace StringCalculator
         private int Count = 0;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
         private const string INDICATOR = "//";
+        public event Action<string, int> AddOccured;
 
         public int Add(string numbers)
         {
