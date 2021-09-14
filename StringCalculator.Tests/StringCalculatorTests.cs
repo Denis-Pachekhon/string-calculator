@@ -182,5 +182,18 @@ namespace StringCalculator.Tests
             // assert
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Add_MultipleDelimitersWithLengthLongerThanOneChar_Supported()
+        {
+            var multipleDelimiters = "//[**][%%]\n1**2%%3";
+            var expected = 6;
+
+            // act
+            var result = calculator.Add(multipleDelimiters);
+
+            // assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }
