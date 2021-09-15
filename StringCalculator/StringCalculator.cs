@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace StringCalculator
 {
@@ -13,7 +14,11 @@ namespace StringCalculator
                 return SUM_FOR_Null_Or_White_Space_STRING;
             }
 
-            return int.Parse(numbers);
+            var result = numbers.Split(',')
+                .Select(n => int.Parse(n))
+                .Sum();
+
+            return result;
         }
     }
 }

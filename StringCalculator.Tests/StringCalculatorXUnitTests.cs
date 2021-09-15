@@ -39,5 +39,19 @@ namespace StringCalculator.Tests
             // assert
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData("1,3", 4)]
+        [InlineData("2, 2, 3", 7)]
+        public void Add_TwoNumber_ReturnsTheirSum(string input, int expected)
+        {
+            // arrange
+
+            // act
+            var result = calculator.Add(input);
+
+            // assert
+            Assert.Equal(expected, result);
+        }
     }
 }
