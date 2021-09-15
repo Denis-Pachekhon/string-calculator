@@ -13,7 +13,7 @@ namespace StringCalculator
                 return SUM_FOR_Null_Or_White_Space_STRING;
             }
 
-            return 1;
+            return int.Parse(numbers);
         }
     }
 }

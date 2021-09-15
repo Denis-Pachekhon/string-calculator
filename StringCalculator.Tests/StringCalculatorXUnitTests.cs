@@ -15,12 +15,26 @@ namespace StringCalculator.Tests
         [Theory]
         [InlineData("", 0)]
         [InlineData(" ", 0)]
-        public void Add_EmptyOrWhiteSpace_Zero(string emptyString, int expected)
+        public void Add_EmptyOrWhiteSpace_Zero(string input, int expected)
         {
             // arrange
 
             // act
-            var result = calculator.Add(emptyString);
+            var result = calculator.Add(input);
+
+            // assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("1", 1)]
+        [InlineData("2", 2)]
+        public void Add_OneNumber_ReturnsTheSameNumber(string input, int expected)
+        {
+            // arrange
+
+            // act
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);
