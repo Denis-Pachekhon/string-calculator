@@ -21,12 +21,14 @@ namespace StringCalculator
                 UpdateSeparatorsList(numbersString);
             }
 
-            var result = numbersString.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries)
-                .Where(x => int.TryParse(x, out int value))
-                .Select(n => int.Parse(n))
-                .Sum();
+            var numbersList = GetCleanNumbers(numbersString);
 
-            return result;
+            if (CheckForNegativeNumbers(numbersList))
+            {
+                throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
+            }
+
+            return numbersList.Sum();
         }
 
         private void UpdateSeparatorsList(string numbersString)
@@ -34,6 +36,23 @@ namespace StringCalculator
             var seperator = string.Concat(numbersString.Skip(2).TakeWhile(x => !x.Equals('\n')));
 
             SEPERATORS.Add(seperator);
+        }
+
+        private List<int> GetCleanNumbers(string numbersString)
+        {
+            return numbersString.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Where(x => int.TryParse(x, out int value))
+                .Select(n => int.Parse(n)).ToList();
+        }
+
+        private bool CheckForNegativeNumbers(List<int> numbersList)
+        {
+            return numbersList.Any(x => x < 0);
+        }
+
+        private string GetNegativeNumbers(List<int> numbersList)
+        {
+            return String.Join(", ", numbersList.Where(x => x < 0).Select(x => x.ToString()));
         }
     }
 }

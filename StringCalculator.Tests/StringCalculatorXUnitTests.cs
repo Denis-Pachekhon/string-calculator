@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Xunit;
 
 namespace StringCalculator.Tests
@@ -79,6 +80,19 @@ namespace StringCalculator.Tests
 
             // assert
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void Add_Negative_Throws()
+        {
+            // arrange
+            var negative = "-2";
+
+            // act
+
+            // assert
+            var actual = Assert.Throws<ApplicationException>(() => calculator.Add(negative));
+            Assert.Equal("Negatives not allowed: -2", actual.Message);
         }
     }
 }
