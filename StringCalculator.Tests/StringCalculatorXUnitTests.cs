@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Xunit;
 
 namespace StringCalculator.Tests
@@ -14,85 +15,85 @@ namespace StringCalculator.Tests
 
         [Theory]
         [InlineData("", 0)]
-        [InlineData("\n", 0)]
-        public void Add_EmptyOrWhiteSpace_Zero(string emptyString, int expected)
+        [InlineData(" ", 0)]
+        public void Add_EmptyOrWhiteSpace_Zero(string input, int expected)
         {
             // arrange
 
             // act
-            var result = calculator.Add(emptyString);
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Add_OneNumber_ReturnsTheSameNumber()
+        [Theory]
+        [InlineData("1", 1)]
+        [InlineData("2", 2)]
+        public void Add_OneNumber_ReturnsTheSameNumber(string input, int expected)
         {
             // arrange
-            var oneNumber = "3";
-            var expected = 3;
 
             // act
-            var result = calculator.Add(oneNumber);
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Add_TwoNumber_ReturnsTheirSum()
+        [Theory]
+        [InlineData("1,3", 4)]
+        [InlineData("2, 2, 3", 7)]
+        public void Add_TwoNumber_ReturnsTheirSum(string input, int expected)
         {
             // arrange
-            var twoNumber = "12,2";
-            var expected = 14;
 
             // act
-            var result = calculator.Add(twoNumber);
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Add_NewLine_NewLineAsSeparator()
+        [Theory]
+        [InlineData("1\n3", 4)]
+        [InlineData("1,2\n3", 6)]
+        public void Add_NewLine_NewLineAsSeparator(string input, int expected)
         {
             // arrange
-            var newLine = "1,2\n3";
-            var expected = 6;
 
             // act
-            var result = calculator.Add(newLine);
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Add_DifferentDelimiter_SumNumbers()
+        [Theory]
+        [InlineData("//;;;\n1;;;2", 3)]
+        public void Add_DifferentDelimiter_Supported(string input, int expected)
         {
             // arrange
-            var differentDelimiter = "//;;;\n1;;;2";
-            var expected = 3;
 
             // act
-            var result = calculator.Add(differentDelimiter);
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Add_Negative_Throws()
+        [Theory]
+        [InlineData("-2", "Negatives not allowed: -2")]
+        [InlineData("-2,-3", "Negatives not allowed: -2, -3")]
+        public void Add_Negative_Throws(string input, string expected)
         {
             // arrange
-            var negative = "-2";
 
             // act
 
             // assert
-            var actual = Assert.Throws<ApplicationException>(() => calculator.Add(negative));
-            Assert.Equal("Negatives not allowed: -2", actual.Message);
+            var actual = Assert.Throws<ApplicationException>(() => calculator.Add(input));
+            Assert.Equal(expected, actual.Message);
         }
 
         [Fact]
@@ -128,57 +129,30 @@ namespace StringCalculator.Tests
             Assert.Equal(giveResult, sum);
         }
 
-        [Fact]
-        public void Add_NumbersBiggerThan1000_Ignored()
+        [Theory]
+        [InlineData("1005, 3\n10002\n5", 8)]
+        [InlineData("1,2\n3000", 3)]
+        public void Add_NumbersBiggerThan1000_Ignored(string input, int expected)
         {
             // arrange
-            var numbersBiggerThan1000 = "1005, 3\n10002\n5";
-            var expected = 8;
 
             // act
-            var result = calculator.Add(numbersBiggerThan1000);
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Add_OtherFormatDelimiters_Supported()
+        [Theory]
+        [InlineData("//[***]\n1***2***3", 6)]
+        [InlineData("//[*][%]\n1*2%3", 6)]
+        [InlineData("//[**][%%]\n1**2%%3", 6)]
+        public void Add_OtherFormatDelimiters_Supported(string input, int expected)
         {
             // arrange
-            var otherFormatDelimiters = "//[***]\n1***2***3";
-            var expected = 6;
 
             // act
-            var result = calculator.Add(otherFormatDelimiters);
-
-            // assert
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void Add_MultipleDelimiters_Supported()
-        {
-            // arrange
-            var multipleDelimiters = "//[*][%]\n1*2%3";
-            var expected = 6;
-
-            // act
-            var result = calculator.Add(multipleDelimiters);
-
-            // assert
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void Add_MultipleDelimitersWithLengthLongerThanOneChar_Supported()
-        {
-            // arrange
-            var multipleDelimiters = "//[**][%%]\n1**2%%3";
-            var expected = 6;
-
-            // act
-            var result = calculator.Add(multipleDelimiters);
+            var result = calculator.Add(input);
 
             // assert
             Assert.Equal(expected, result);

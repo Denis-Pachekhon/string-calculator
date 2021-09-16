@@ -6,91 +6,67 @@ namespace StringCalculator
 {
     public class StringCalculator
     {
-        private const int SUM_FOR_AN_EMPTY_STRING = 0;
-        private int Count = 0;
-        private const int MAX_NUMBER = 1000;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
-        private const string INDICATOR = "//";
+        private int Count = 0;
         public event Action<string, int> AddOccured;
 
-        public int Add(string numbers)
+        public int Add(string numbersString)
         {
             Count++;
 
-            if (String.IsNullOrWhiteSpace(numbers))
+            if (String.IsNullOrWhiteSpace(numbersString))
             {
-                return SUM_FOR_AN_EMPTY_STRING;
+                return 0;
             }
 
-            if (numbers.StartsWith(INDICATOR))
+            if (numbersString.StartsWith("//"))
             {
-                AddNewSeperators(numbers);
-
-                numbers = ClearStringOfNumbersFromTheIndicators(numbers);
+                UpdateSeparatorsList(numbersString);
             }
 
-            var listNumbers = GetNumbers(numbers);
+            var numbersList = GetCleanNumbers(numbersString);
 
-            int sum = listNumbers.Sum();
+            if (CheckForNegativeNumbers(numbersList))
+            {
+                throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
+            }
+
+            int sum = numbersList.Where(n => n <= 1000).Sum();
 
             if (AddOccured != null)
-            { 
-                AddOccured.Invoke(numbers, sum);
+            {
+                AddOccured.Invoke(numbersString, sum);
             }
 
             return sum;
         }
-            
-        private List<int> GetNumbers(string numbers)
+
+        private void UpdateSeparatorsList(string numbersString)
         {
-            var nums = numbers.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] customSeparatorIndicators = { "[", "]" };
 
-            var listNumbers = new List<int>();
+            var customSeparatorsString = string.Concat(numbersString.Skip(2).TakeWhile(n => !n.Equals('\n')));
 
-            foreach (var num in nums)
-            {
-                var number = int.Parse(num);
+            var seperators = customSeparatorsString.Split(customSeparatorIndicators, StringSplitOptions.RemoveEmptyEntries);
 
-                if (number < 0)
-                {
-                    throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(nums));
-                }
-
-                if (number <= MAX_NUMBER)
-                {
-                    listNumbers.Add(number);
-                }
-            }
-
-            return listNumbers;
+            SEPERATORS.AddRange(seperators);
         }
 
-        private void AddNewSeperators(string numbers)
+        private List<int> GetCleanNumbers(string numbersString)
         {
-            string[] indicators = { INDICATOR, "[", "]" };
-
-            var customSeperator = numbers.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).First();
-
-            var seperators = customSeperator.Split(indicators, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var seperator in seperators)
-            {
-                SEPERATORS.Add(seperator);
-            }
+            return numbersString.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Where(n => int.TryParse(n, out int value))
+                .Select(n => int.Parse(n)).ToList();
         }
 
-        private string ClearStringOfNumbersFromTheIndicators(string numbers)
+        private bool CheckForNegativeNumbers(List<int> numbersList)
         {
-            var customSeperator = numbers.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).First();
-
-            numbers = numbers.Substring(customSeperator.Length, numbers.Length - customSeperator.Length);
-
-            return numbers;
+            return numbersList.Any(n => n < 0);
         }
 
-        private string GetNegativeNumbers(string[] nums)
+        private string GetNegativeNumbers(List<int> numbersList)
         {
-            return String.Join(", ", nums.Where(x => int.Parse(x) < 0).Select(x => x.ToString()));
+            return String.Join(", ", numbersList.Where(n => n < 0).Select(n => n.ToString()));
         }
 
         public int GetCalledCount()
