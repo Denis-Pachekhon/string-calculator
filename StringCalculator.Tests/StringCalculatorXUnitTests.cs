@@ -82,17 +82,18 @@ namespace StringCalculator.Tests
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void Add_Negative_Throws()
+        [Theory]
+        [InlineData("-2", "Negatives not allowed: -2")]
+        [InlineData("-2,-3", "Negatives not allowed: -2, -3")]
+        public void Add_Negative_Throws(string input, string expected)
         {
             // arrange
-            var negative = "-2";
 
             // act
 
             // assert
-            var actual = Assert.Throws<ApplicationException>(() => calculator.Add(negative));
-            Assert.Equal("Negatives not allowed: -2", actual.Message);
+            var actual = Assert.Throws<ApplicationException>(() => calculator.Add(input));
+            Assert.Equal(expected, actual.Message);
         }
     }
 }
