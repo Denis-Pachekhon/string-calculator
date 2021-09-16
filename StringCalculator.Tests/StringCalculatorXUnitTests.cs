@@ -142,5 +142,18 @@ namespace StringCalculator.Tests
             // assert
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData("//[***]\n1***2***3", 6)]
+        public void Add_OtherFormatDelimiters_Supported(string input, int expected)
+        {
+            // arrange
+
+            // act
+            var result = calculator.Add(input);
+
+            // assert
+            Assert.Equal(expected, result);
+        }
     }
 }

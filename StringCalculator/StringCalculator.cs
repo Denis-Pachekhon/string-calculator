@@ -44,9 +44,16 @@ namespace StringCalculator
 
         private void UpdateSeparatorsList(string numbersString)
         {
-            var seperator = string.Concat(numbersString.Skip(2).TakeWhile(n => !n.Equals('\n')));
+            string[] customSeparatorIndicators = { "[", "]" };
 
-            SEPERATORS.Add(seperator);
+            var customSeperatorIndicatorsAndSeparator = string.Concat(numbersString.Skip(2).TakeWhile(n => !n.Equals('\n')));
+
+            var seperators = customSeperatorIndicatorsAndSeparator.Split(customSeparatorIndicators, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var seperator in seperators)
+            {
+                SEPERATORS.Add(seperator);
+            }
         }
 
         private List<int> GetCleanNumbers(string numbersString)
