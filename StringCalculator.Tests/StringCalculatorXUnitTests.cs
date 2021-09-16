@@ -128,5 +128,19 @@ namespace StringCalculator.Tests
             // assert
             Assert.Equal(giveResult, sum);
         }
+
+        [Theory]
+        [InlineData("1005, 3\n10002\n5", 8)]
+        [InlineData("1,2\n3000", 3)]
+        public void Add_NumbersBiggerThan1000_Ignored(string input, int expected)
+        {
+            // arrange
+
+            // act
+            var result = calculator.Add(input);
+
+            // assert
+            Assert.Equal(expected, result);
+        }
     }
 }

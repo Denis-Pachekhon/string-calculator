@@ -32,7 +32,7 @@ namespace StringCalculator
                 throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
             }
 
-            int sum = numbersList.Sum();
+            int sum = numbersList.Where(n => n <= 1000).Sum();
 
             if (AddOccured != null)
             {
@@ -44,7 +44,7 @@ namespace StringCalculator
 
         private void UpdateSeparatorsList(string numbersString)
         {
-            var seperator = string.Concat(numbersString.Skip(2).TakeWhile(x => !x.Equals('\n')));
+            var seperator = string.Concat(numbersString.Skip(2).TakeWhile(n => !n.Equals('\n')));
 
             SEPERATORS.Add(seperator);
         }
@@ -52,18 +52,18 @@ namespace StringCalculator
         private List<int> GetCleanNumbers(string numbersString)
         {
             return numbersString.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries)
-                .Where(x => int.TryParse(x, out int value))
+                .Where(n => int.TryParse(n, out int value))
                 .Select(n => int.Parse(n)).ToList();
         }
 
         private bool CheckForNegativeNumbers(List<int> numbersList)
         {
-            return numbersList.Any(x => x < 0);
+            return numbersList.Any(n => n < 0);
         }
 
         private string GetNegativeNumbers(List<int> numbersList)
         {
-            return String.Join(", ", numbersList.Where(x => x < 0).Select(x => x.ToString()));
+            return String.Join(", ", numbersList.Where(n => n < 0).Select(n => n.ToString()));
         }
 
         public int GetCalledCount()
