@@ -95,5 +95,20 @@ namespace StringCalculator.Tests
             var actual = Assert.Throws<ApplicationException>(() => calculator.Add(input));
             Assert.Equal(expected, actual.Message);
         }
+
+        [Fact]
+        public void GetCalledCount_Call2Add_Called2Add()
+        {
+            // arrange
+            var expected = 2;
+
+            // act
+            calculator.Add("");
+            calculator.Add("");
+            var count = calculator.GetCalledCount();
+
+            // assert
+            Assert.Equal(expected, count);
+        }
     }
 }

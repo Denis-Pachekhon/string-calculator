@@ -8,9 +8,12 @@ namespace StringCalculator
     {
         private const int SUM_FOR_Null_Or_White_Space_STRING = 0;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
+        private int Count = 0;
 
         public int Add(string numbersString)
         {
+            Count++;
+
             if (String.IsNullOrWhiteSpace(numbersString))
             {
                 return SUM_FOR_Null_Or_White_Space_STRING;
@@ -53,6 +56,11 @@ namespace StringCalculator
         private string GetNegativeNumbers(List<int> numbersList)
         {
             return String.Join(", ", numbersList.Where(x => x < 0).Select(x => x.ToString()));
+        }
+
+        public int GetCalledCount()
+        {
+            return Count;
         }
     }
 }
