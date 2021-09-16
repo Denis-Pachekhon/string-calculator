@@ -9,6 +9,7 @@ namespace StringCalculator
         private const int SUM_FOR_Null_Or_White_Space_STRING = 0;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
         private int Count = 0;
+        public event Action<string, int> AddOccured;
 
         public int Add(string numbersString)
         {
@@ -31,7 +32,14 @@ namespace StringCalculator
                 throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
             }
 
-            return numbersList.Sum();
+            int sum = numbersList.Sum();
+
+            if (AddOccured != null)
+            {
+                AddOccured.Invoke(numbersString, sum);
+            }
+
+            return sum;
         }
 
         private void UpdateSeparatorsList(string numbersString)

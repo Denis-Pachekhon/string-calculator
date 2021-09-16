@@ -110,5 +110,23 @@ namespace StringCalculator.Tests
             // assert
             Assert.Equal(expected, count);
         }
+
+        [Fact]
+        public void Add_Event_EventCall()
+        {
+            // arrange
+            int giveResult = 0;
+
+            calculator.AddOccured += delegate (string input, int result)
+            {
+                giveResult = result;
+            };
+
+            // act
+            var sum = calculator.Add("1");
+
+            // assert
+            Assert.Equal(giveResult, sum);
+        }
     }
 }
