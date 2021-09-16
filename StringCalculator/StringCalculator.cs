@@ -45,14 +45,11 @@ namespace StringCalculator
         {
             string[] customSeparatorIndicators = { "[", "]" };
 
-            var customSeperatorIndicatorsAndSeparator = string.Concat(numbersString.Skip(2).TakeWhile(n => !n.Equals('\n')));
+            var customSeparatorsString = string.Concat(numbersString.Skip(2).TakeWhile(n => !n.Equals('\n')));
 
-            var seperators = customSeperatorIndicatorsAndSeparator.Split(customSeparatorIndicators, StringSplitOptions.RemoveEmptyEntries);
+            var seperators = customSeparatorsString.Split(customSeparatorIndicators, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var seperator in seperators)
-            {
-                SEPERATORS.Add(seperator);
-            }
+            SEPERATORS.AddRange(seperators);
         }
 
         private List<int> GetCleanNumbers(string numbersString)
