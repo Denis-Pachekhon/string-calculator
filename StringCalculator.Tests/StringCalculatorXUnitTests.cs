@@ -145,6 +145,8 @@ namespace StringCalculator.Tests
 
         [Theory]
         [InlineData("//[***]\n1***2***3", 6)]
+        [InlineData("//[*][%]\n1*2%3", 6)]
+        [InlineData("//[**][%%]\n1**2%%3", 6)]
         public void Add_OtherFormatDelimiters_Supported(string input, int expected)
         {
             // arrange
