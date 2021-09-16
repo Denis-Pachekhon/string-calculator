@@ -6,7 +6,6 @@ namespace StringCalculator
 {
     public class StringCalculator
     {
-        private const int SUM_FOR_Null_Or_White_Space_STRING = 0;
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
         private int Count = 0;
         public event Action<string, int> AddOccured;
@@ -17,7 +16,7 @@ namespace StringCalculator
 
             if (String.IsNullOrWhiteSpace(numbersString))
             {
-                return SUM_FOR_Null_Or_White_Space_STRING;
+                return 0;
             }
 
             if (numbersString.StartsWith("//"))
