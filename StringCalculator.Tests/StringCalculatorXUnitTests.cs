@@ -53,5 +53,19 @@ namespace StringCalculator.Tests
             // assert
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData("1\n3", 4)]
+        [InlineData("1,2\n3", 6)]
+        public void Add_NewLine_NewLineAsSeparator(string input, int expected)
+        {
+            // arrange
+
+            // act
+            var result = calculator.Add(input);
+
+            // assert
+            Assert.Equal(expected, result);
+        }
     }
 }
