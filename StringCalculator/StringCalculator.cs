@@ -22,6 +22,7 @@ namespace StringCalculator
             if (numbersString.StartsWith("//"))
             {
                 UpdateSeparatorsList(numbersString);
+                numbersString = GetNumbersAndDelimitersString(numbersString);
             }
 
             var numbersList = GetCleanNumbers(numbersString);
@@ -52,10 +53,14 @@ namespace StringCalculator
             SEPERATORS.AddRange(seperators);
         }
 
+        private string GetNumbersAndDelimitersString(string numbersString)
+        {
+            return string.Concat(numbersString.SkipWhile(n => !n.Equals('\n')));
+        }
+
         private List<int> GetCleanNumbers(string numbersString)
         {
             return numbersString.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries)
-                .Where(n => int.TryParse(n, out int value))
                 .Select(n => int.Parse(n)).ToList();
         }
 
