@@ -105,7 +105,7 @@ namespace StringCalculator.Tests
             // act
             calculator.Add("");
             calculator.Add("");
-            var count = calculator.GetCalledCount();
+            var count = calculator.Count;
 
             // assert
             Assert.Equal(expected, count);
