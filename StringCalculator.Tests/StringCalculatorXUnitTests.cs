@@ -1,4 +1,4 @@
-﻿
+﻿using FluentAssertions;
 using System;
 using Xunit;
 
@@ -24,7 +24,7 @@ namespace StringCalculator.Tests
             var result = calculator.Add(input);
 
             // assert
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
 
         [Theory]
@@ -38,7 +38,7 @@ namespace StringCalculator.Tests
             var result = calculator.Add(input);
 
             // assert
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
 
         [Theory]
@@ -52,7 +52,7 @@ namespace StringCalculator.Tests
             var result = calculator.Add(input);
 
             // assert
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
 
         [Theory]
@@ -66,7 +66,7 @@ namespace StringCalculator.Tests
             var result = calculator.Add(input);
 
             // assert
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
 
         [Theory]
@@ -79,7 +79,7 @@ namespace StringCalculator.Tests
             var result = calculator.Add(input);
 
             // assert
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
 
         [Theory]
@@ -92,8 +92,8 @@ namespace StringCalculator.Tests
             // act
 
             // assert
-            var actual = Assert.Throws<ApplicationException>(() => calculator.Add(input));
-            Assert.Equal(expected, actual.Message);
+            var actual = Assert.Throws<FindNegativesException>(() => calculator.Add(input));
+            actual.Message.Should().Be(expected);
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace StringCalculator.Tests
             var count = calculator.Count;
 
             // assert
-            Assert.Equal(expected, count);
+            count.Should().Be(expected);
         }
 
         [Fact]
@@ -126,7 +126,7 @@ namespace StringCalculator.Tests
             var sum = calculator.Add("1");
 
             // assert
-            Assert.Equal(giveResult, sum);
+            sum.Should().Be(giveResult);
         }
 
         [Theory]
@@ -140,7 +140,7 @@ namespace StringCalculator.Tests
             var result = calculator.Add(input);
 
             // assert
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
 
         [Theory]
@@ -155,7 +155,7 @@ namespace StringCalculator.Tests
             var result = calculator.Add(input);
 
             // assert
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
     }
 }

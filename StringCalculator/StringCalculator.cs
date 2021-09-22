@@ -29,7 +29,7 @@ namespace StringCalculator
 
             if (CheckForNegativeNumbers(numbersList))
             {
-                throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
+                throw new FindNegativesException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
             }
 
             int sum = numbersList.Where(n => n <= 1000).Sum();
