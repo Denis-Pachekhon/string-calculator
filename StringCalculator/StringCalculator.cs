@@ -7,7 +7,7 @@ namespace StringCalculator
     public class StringCalculator
     {
         private List<string> SEPERATORS = new List<string>() { ",", "\n" };
-        private int Count = 0;
+        public int Count { get; private set; } = 0;
         public event Action<string, int> AddOccured;
 
         public int Add(string numbersString)
@@ -27,17 +27,16 @@ namespace StringCalculator
 
             var numbersList = GetCleanNumbers(numbersString);
 
-            if (CheckForNegativeNumbers(numbersList))
+            var negatives = numbersList.Where(num => num < 0).ToList();
+
+            if (negatives.Any())
             {
-                throw new ApplicationException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
+                throw new FindNegativesException(negatives);
             }
 
             int sum = numbersList.Where(n => n <= 1000).Sum();
 
-            if (AddOccured != null)
-            {
-                AddOccured.Invoke(numbersString, sum);
-            }
+            AddOccured?.Invoke(numbersString, sum);
 
             return sum;
         }
@@ -62,21 +61,6 @@ namespace StringCalculator
         {
             return numbersString.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries)
                 .Select(n => int.Parse(n)).ToList();
-        }
-
-        private bool CheckForNegativeNumbers(List<int> numbersList)
-        {
-            return numbersList.Any(n => n < 0);
-        }
-
-        private string GetNegativeNumbers(List<int> numbersList)
-        {
-            return String.Join(", ", numbersList.Where(n => n < 0).Select(n => n.ToString()));
-        }
-
-        public int GetCalledCount()
-        {
-            return Count;
         }
     }
 }
