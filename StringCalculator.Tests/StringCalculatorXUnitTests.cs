@@ -126,7 +126,7 @@ namespace StringCalculator.Tests
             var sum = calculator.Add("1");
 
             // assert
-            sum.Should().Be(giveResult);
+            Assert.Equal(giveResult, sum);
         }
 
         [Theory]

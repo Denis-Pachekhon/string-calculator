@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace StringCalculator
 {
     public class FindNegativesException : Exception
     {
-        public FindNegativesException(string message) : base(message)
+        public FindNegativesException(List<int> negatives) : base(ChangeToString(negatives))
         {
 
+        }
+
+        private static string ChangeToString(List<int> negatives)
+        {
+            return "Negatives not allowed: " + String.Join(", ", negatives);
         }
     }
 }

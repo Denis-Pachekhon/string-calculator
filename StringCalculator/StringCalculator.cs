@@ -27,9 +27,11 @@ namespace StringCalculator
 
             var numbersList = GetCleanNumbers(numbersString);
 
-            if (CheckForNegativeNumbers(numbersList))
+            var negatives = numbersList.Where(num => num < 0).ToList();
+
+            if (negatives.Any())
             {
-                throw new FindNegativesException("Negatives not allowed: " + GetNegativeNumbers(numbersList));
+                throw new FindNegativesException(negatives);
             }
 
             int sum = numbersList.Where(n => n <= 1000).Sum();
@@ -59,16 +61,6 @@ namespace StringCalculator
         {
             return numbersString.Split(SEPERATORS.ToArray(), StringSplitOptions.RemoveEmptyEntries)
                 .Select(n => int.Parse(n)).ToList();
-        }
-
-        private bool CheckForNegativeNumbers(List<int> numbersList)
-        {
-            return numbersList.Any(n => n < 0);
-        }
-
-        private string GetNegativeNumbers(List<int> numbersList)
-        {
-            return String.Join(", ", numbersList.Where(n => n < 0).Select(n => n.ToString()));
         }
     }
 }
